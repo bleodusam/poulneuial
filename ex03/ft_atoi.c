@@ -12,69 +12,32 @@
 
 #include <unistd.h>
 
-int check_begining(char *str)
+int ft_atoi(char *str)
 {
 	int i;
-	int output;
+	long output;
+	int sign;
 
 	i = 0;
-	output = 1;
+	sign = 1;
+	output = 0;
 	while (str[i] == ' ')
 		i++;
 	while (str[i] == '-' || str[i] == '+')
 	{
 		if(str[i]  == '-')
-			output = -1 * output;
+			sign = -1 * sign;
 		i++;
 	}
-	return (output);
-}
-
-int check_empty_length(char *str)
-{
-	int i;
-
-	i = 0;
-	while (!(str[i] >= '0' && str[i] <= '9') &&
-	 (str[i] == '-' || str[i] == '+' || str[i] == ' '))
+	if(str[i] >= '0' && str[i] <= '9')
+	{
+		while(str[i] >= '0' && str[i] <= '9')
+		{
+			output = output * 10 + str[i] - '0';
 			i++;
-
-	return (i);
-}
-
-int check_full_length(char *str)
-{
-	int i;
-
-	i = check_empty_length(str);
-	while(str[i] >= '0' && str[i] <= '9')
-	{
-		i++;
+		}
+	return ((int)output * sign);
 	}
-	return (i);
-}
-
-int ft_atoi(char *str)
-{
-	int i;
-	long output;
-	int disaine;
-
-	output = 0;
-	i = check_full_length(str);
-	if (i == check_empty_length(str))
+	else
 		return (0);
-	disaine = 1;
-	while(i > check_empty_length(str))
-	{
-		output = output + (long)((str[i - 1] - '0') * disaine);
-
-
-		printf("str[i] : %d\n", (str[i - 1] - '0') );
-
-			printf("output : %ld\n", output );
-		disaine = disaine * 10;
-		i--;
-	}
-	return(((int)output) * check_begining(str));
 }
