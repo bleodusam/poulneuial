@@ -6,7 +6,7 @@
 /*   By: tin <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:26:53 by tin               #+#    #+#             */
-/*   Updated: 2019/07/07 20:23:59 by tin              ###   ########.fr       */
+/*   Updated: 2019/07/08 16:04:01 by tin              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 long	base_settings(char *base)
 {
 	long	i;
+	long	j;
 	int		output;
 
 	i = 0;
@@ -24,12 +25,18 @@ long	base_settings(char *base)
 		if ((base[i] >= 'A' && base[i] <= 'Z') ||
 			(base[i] >= 'a' && base[i] <= 'z') ||
 				(base[i] >= '0' && base[i] <= '9'))
+		{
+			j = -1;
+			while (++j < i)
+			{
+				if (base[i] == base[j])
+					return (0);
+			}
 			output++;
+		}
 		i++;
-		if (output != i)
-			output = 0;
 	}
-	if (output == 1 || output == 0)
+	if (output == 1 || output == 0 || output != i)
 		return (0);
 	return (output);
 }
