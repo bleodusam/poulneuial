@@ -6,7 +6,7 @@
 /*   By: tin <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 21:17:47 by tin               #+#    #+#             */
-/*   Updated: 2019/07/08 16:24:47 by tin              ###   ########.fr       */
+/*   Updated: 2019/07/09 09:51:43 by tin              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		sign(char *str)
 	i = 0;
 	sign = 1;
 	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' ||
-		str[i] == '\t' || str[i] == '\v')
+		str[i] == '\t' || str[i] == '\v' || str[i] == '\r')
 		i++;
 	while (str[i] == '-' || str[i] == '+')
 	{
@@ -46,10 +46,10 @@ int		check_begining(char *str)
 	return (i);
 }
 
-long	base_settings(char *base)
+int		base_settings(char *base)
 {
-	long	i;
-	long	j;
+	int		i;
+	int		j;
 	int		output;
 
 	i = 0;
@@ -79,7 +79,7 @@ int		ft_atoi_base(char *str, char *base)
 {
 	int		i;
 	int		j;
-	long	output;
+	int		output;
 
 	i = check_begining(str);
 	output = 0;
@@ -91,10 +91,10 @@ int		ft_atoi_base(char *str, char *base)
 		j++;
 		if (str[i] == base[j])
 		{
-			output = output * (base_settings(base)) + j;
+			output = output * (base_settings(base)) + sign(str) * j;
 			i++;
 			j = -1;
 		}
 	}
-	return ((int)output * sign(str));
+	return (output);
 }

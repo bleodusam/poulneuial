@@ -6,7 +6,7 @@
 /*   By: tin <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:26:53 by tin               #+#    #+#             */
-/*   Updated: 2019/07/08 16:04:01 by tin              ###   ########.fr       */
+/*   Updated: 2019/07/09 10:01:50 by tin              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,14 @@ void	ft_putnbr_base(int nbr, char *base)
 	char c;
 
 	l_nbr = (long)nbr;
-	c = '-';
-	if (l_nbr < 0)
-	{
-		write(1, &c, 1);
-		l_nbr = -1 * l_nbr;
-	}
 	if (base_settings(base))
+	{
+		c = '-';
+		if (l_nbr < 0)
+		{
+			write(1, &c, 1);
+			l_nbr = -1 * l_nbr;
+		}
 		print_number(l_nbr, base, max_multipl_base(base));
+	}
 }
